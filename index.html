@@ -8,37 +8,40 @@
     <script src="data_fruits.js"></script>
 </head>
 <body class="min-h-screen bg-linear-to-r from-lime-200 via-green-400 to-emerald-600 flex flex-col items-center justify-center">
-    <h1>Déli Gyümölcsök</h1>
-    <p>Neked melyik a kedvenced?</p>
-    <select id="gyumolcs" onchange="showDetails(this)">
-        <option value="0">Válassz...</option>
-        
-    </select>
-    <div id="details">
-        
+    <h1 class="text-green-900 font-bold text-5xl mb-10">Déli Gyümölcsök</h1>
+    <div>
+        <p>Neked melyik a kedvenced?</p>
+        <select id="gyumolcs" onchange="showDetails(this)">
+            <option value="0">Válassz...</option>
+        </select>
     </div>
+    <div></div>
+    
+    <div id="details"></div>
     <script>
         document.getElementById('gyumolcs').innerHTML += fruits.map(obj => `
             <option value="${obj.id}">${obj.name}</option>
         `).join("");
         document.getElementById('details').innerHTML = (`
-                <img src="img/fruits.webp">
+                <img src="img/fruits.webp" class = "rounded-3xl">
             `)
 
         const showDetails = (domObj) => {
             const id = +domObj.value
             const searchFruit = fruits.find(obj => obj.id == id)
-        if (id != 0) {
-            document.getElementById('details').innerHTML = (`
-                <img src="img/${searchFruit.image}">
-                <p>${searchFruit.descr}</p>
-            `)
-        } else {
-            document.getElementById('details').innerHTML = (`
-                <img src="img/fruits.webp">
-            `)
-        } 
-            
+            if (id != 0) {
+                document.getElementById('details').innerHTML = (`
+                    <div class = "rounded-3xl">
+                        <img src="img/${searchFruit.image}">
+                        <p class = "bg-white">${searchFruit.descr}</p>
+                    </div>
+                    
+                `)
+            } else {
+                document.getElementById('details').innerHTML = (`
+                    <img src="img/fruits.webp" class = "rounded-3xl">
+                `)
+            } 
         }
     </script>
 </body>
