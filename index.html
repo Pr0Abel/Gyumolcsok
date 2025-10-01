@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Gyümölcsök</title>
+    <script src="data_fruits.js"></script>
+</head>
+<body class="min-h-screen bg-linear-to-r from-lime-200 via-green-400 to-emerald-600 flex flex-col items-center justify-center">
+    <h1>Déli Gyümölcsök</h1>
+    <p>Neked melyik a kedvenced?</p>
+    <select id="gyumolcs" onchange="showDetails(this)">
+        <option value="0">Válassz...</option>
+        
+    </select>
+    <div id="details">
+        
+    </div>
+    <script>
+        document.getElementById('gyumolcs').innerHTML += fruits.map(obj => `
+            <option value="${obj.id}">${obj.name}</option>
+        `).join("");
+        document.getElementById('details').innerHTML = (`
+                <img src="img/fruits.webp">
+            `)
+
+        const showDetails = (domObj) => {
+            const id = +domObj.value
+            const searchFruit = fruits.find(obj => obj.id == id)
+        if (id != 0) {
+            document.getElementById('details').innerHTML = (`
+                <img src="img/${searchFruit.image}">
+                <p>${searchFruit.descr}</p>
+            `)
+        } else {
+            document.getElementById('details').innerHTML = (`
+                <img src="img/fruits.webp">
+            `)
+        } 
+            
+        }
+    </script>
+</body>
+</html>
